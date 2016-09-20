@@ -27,15 +27,15 @@ node {
         sh "docker login -u ${env.DOCKERHUB_USERNAME} -p ${env.DOCKERHUB_PASSWORD} -e demo@mesosphere.com"
         sh "docker push babueverest/vny:${gitCommit()}"
     }
-}
 
 // Deploy
 stage 'Deploy'
-marathon{
+marathon(
         url: 'http://marathon.mesos:8080',
         forceUpdate: false,
         credentialsId: 'dcos-token',
         filename: 'marathon.json',
         appId: 'nginx-mesosphere',
         docker: "babueverest/vny:${gitCommit()}".toString()
+)
 }
