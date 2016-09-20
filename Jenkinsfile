@@ -30,13 +30,12 @@ node {
 }
 
 // Deploy
-    stage 'Deploy'
-
-    marathon(
+stage 'Deploy'
+marathon(
         url: 'http://marathon.mesos:8080',
         forceUpdate: false,
         credentialsId: 'dcos-token',
         filename: 'marathon.json',
         appId: 'nginx-mesosphere',
         docker: "babueverest/vny:${gitCommit()}".toString()
-    )
+)
