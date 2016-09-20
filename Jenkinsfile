@@ -25,7 +25,7 @@ node {
         ]]
     ) {
         sh "docker login -u ${env.DOCKERHUB_USERNAME} -p ${env.DOCKERHUB_PASSWORD} -e demo@mesosphere.com"
-        sh "docker push babueverest/vny:${gitCommit()}"
+        sh "docker push ttest321/vnytest1:${gitCommit()}"
     }
 
 // Deploy
@@ -36,6 +36,6 @@ marathon(
         credentialsId: 'dcos-token',
         filename: 'marathon.json',
         appId: 'nginx-mesosphere',
-        docker: "babueverest/vny:${gitCommit()}".toString()
+        docker: "ttest321/vnytest1:${gitCommit()}".toString()
 )
 }
